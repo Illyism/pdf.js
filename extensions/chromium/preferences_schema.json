@@ -14,18 +14,6 @@
       "pattern": "|auto|page-actual|page-width|page-height|page-fit|[0-9]+\\.?[0-9]*(,[0-9]+\\.?[0-9]*){0,2}",
       "default": ""
     },
-    "sidebarViewOnLoad": {
-      "title": "Sidebar state on load",
-      "description": "Controls the state of the sidebar upon load.\n 0 = do not show sidebar.\n 1 = show thumbnails in sidebar.\n 2 = show document outline in sidebar.\n 3 = Show attachments in sidebar.",
-      "type": "integer",
-      "enum": [
-        0,
-        1,
-        2,
-        3
-      ],
-      "default": 0
-    },
     "enableHandToolOnLoad": {
       "description": "Deprecated. Set cursorToolOnLoad to 1 to enable the hand tool by default.",
       "type": "boolean",

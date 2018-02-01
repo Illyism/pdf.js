@@ -28,12 +28,10 @@ const RenderingStates = {
 class PDFRenderingQueue {
   constructor() {
     this.pdfViewer = null;
-    this.pdfThumbnailViewer = null;
     this.onIdle = null;
     this.highestPriorityPage = null;
     this.idleTimeout = null;
     this.printing = false;
-    this.isThumbnailViewEnabled = false;
   }
 
   /**
@@ -41,13 +39,6 @@ class PDFRenderingQueue {
    */
   setViewer(pdfViewer) {
     this.pdfViewer = pdfViewer;
-  }
-
-  /**
-   * @param {PDFThumbnailViewer} pdfThumbnailViewer
-   */
-  setThumbnailViewer(pdfThumbnailViewer) {
-    this.pdfThumbnailViewer = pdfThumbnailViewer;
   }
 
   /**
@@ -70,12 +61,6 @@ class PDFRenderingQueue {
     // Pages have a higher priority than thumbnails, so check them first.
     if (this.pdfViewer.forceRendering(currentlyVisiblePages)) {
       return;
-    }
-    // No pages needed rendering, so check thumbnails.
-    if (this.pdfThumbnailViewer && this.isThumbnailViewEnabled) {
-      if (this.pdfThumbnailViewer.forceRendering()) {
-        return;
-      }
     }
 
     if (this.printing) {

@@ -56,25 +56,6 @@ class PDFPresentationMode {
     this.mouseScrollTimeStamp = 0;
     this.mouseScrollDelta = 0;
     this.touchSwipeState = null;
-
-    if (contextMenuItems) {
-      contextMenuItems.contextFirstPage.addEventListener('click', () => {
-        this.contextMenuOpen = false;
-        this.eventBus.dispatch('firstpage');
-      });
-      contextMenuItems.contextLastPage.addEventListener('click', () => {
-        this.contextMenuOpen = false;
-        this.eventBus.dispatch('lastpage');
-      });
-      contextMenuItems.contextPageRotateCw.addEventListener('click', () => {
-        this.contextMenuOpen = false;
-        this.eventBus.dispatch('rotatecw');
-      });
-      contextMenuItems.contextPageRotateCcw.addEventListener('click', () => {
-        this.contextMenuOpen = false;
-        this.eventBus.dispatch('rotateccw');
-      });
-    }
   }
 
   /**

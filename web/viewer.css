@@ -145,59 +145,6 @@ select {
   position: relative;
 }
 
-#sidebarContainer {
-  position: absolute;
-  top: 32px;
-  bottom: 0;
-  width: 200px; /* Here, and elsewhere below, keep the constant value for compatibility
-                   with older browsers that lack support for CSS variables. */
-  width: var(--sidebar-width);
-  visibility: hidden;
-  z-index: 100;
-  border-top: 1px solid #333;
-
-  -webkit-transition-duration: 200ms;
-  -webkit-transition-timing-function: ease;
-  transition-duration: 200ms;
-  transition-timing-function: ease;
-}
-html[dir='ltr'] #sidebarContainer {
-  -webkit-transition-property: left;
-  transition-property: left;
-  left: -200px;
-  left: calc(-1 * var(--sidebar-width));
-}
-html[dir='rtl'] #sidebarContainer {
-  -webkit-transition-property: right;
-  transition-property: right;
-  right: -200px;
-  right: calc(-1 * var(--sidebar-width));
-}
-
-.loadingInProgress #sidebarContainer {
-  top: 36px;
-}
-
-#outerContainer.sidebarResizing #sidebarContainer {
-  /* Improve responsiveness and avoid visual glitches when the sidebar is resized. */
-  -webkit-transition-duration: 0s;
-  transition-duration: 0s;
-  /* Prevent e.g. the thumbnails being selected when the sidebar is resized. */
-  -webkit-user-select: none;
-  -moz-user-select: none;
-}
-
-#outerContainer.sidebarMoving #sidebarContainer,
-#outerContainer.sidebarOpen #sidebarContainer {
-  visibility: visible;
-}
-html[dir='ltr'] #outerContainer.sidebarOpen #sidebarContainer {
-  left: 0px;
-}
-html[dir='rtl'] #outerContainer.sidebarOpen #sidebarContainer {
-  right: 0px;
-}
-
 #mainContainer {
   position: absolute;
   top: 0;
@@ -205,24 +152,6 @@ html[dir='rtl'] #outerContainer.sidebarOpen #sidebarContainer {
   bottom: 0;
   left: 0;
   min-width: 320px;
-}
-
-#sidebarContent {
-  top: 32px;
-  bottom: 0;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-  position: absolute;
-  width: 100%;
-  background-color: hsla(0,0%,0%,.1);
-}
-html[dir='ltr'] #sidebarContent {
-  left: 0;
-  box-shadow: inset -1px 0 0 hsla(0,0%,0%,.25);
-}
-html[dir='rtl'] #sidebarContent {
-  right: 0;
-  box-shadow: inset 1px 0 0 hsla(0,0%,0%,.25);
 }
 
 #viewerContainer {
@@ -253,19 +182,6 @@ html[dir='rtl'] #viewerContainer {
   transition-duration: 0s;
 }
 
-html[dir='ltr'] #outerContainer.sidebarOpen #viewerContainer {
-  -webkit-transition-property: left;
-  transition-property: left;
-  left: 200px;
-  left: var(--sidebar-width);
-}
-html[dir='rtl'] #outerContainer.sidebarOpen #viewerContainer {
-  -webkit-transition-property: right;
-  transition-property: right;
-  right: 200px;
-  right: var(--sidebar-width);
-}
-
 .toolbar {
   position: relative;
   left: 0;
@@ -278,55 +194,20 @@ html[dir='rtl'] #outerContainer.sidebarOpen #viewerContainer {
   width: 100%;
 }
 
-#toolbarSidebar {
-  width: 100%;
-  height: 32px;
-  background-color: #424242; /* fallback */
-  background-image: url(images/texture.png),
-                    linear-gradient(hsla(0,0%,30%,.99), hsla(0,0%,25%,.95));
-}
-html[dir='ltr'] #toolbarSidebar {
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.25),
-              inset 0 -1px 0 hsla(0,0%,100%,.05),
-              0 1px 0 hsla(0,0%,0%,.15),
-              0 0 1px hsla(0,0%,0%,.1);
-}
-html[dir='rtl'] #toolbarSidebar {
-  box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.25),
-              inset 0 1px 0 hsla(0,0%,100%,.05),
-              0 1px 0 hsla(0,0%,0%,.15),
-              0 0 1px hsla(0,0%,0%,.1);
-}
-
-#sidebarResizer {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 6px;
-  z-index: 200;
-  cursor: ew-resize;
-}
-html[dir='ltr'] #sidebarResizer {
-  right: -6px;
-}
-html[dir='rtl'] #sidebarResizer {
-  left: -6px;
-}
-
-#toolbarContainer, .findbar, .secondaryToolbar {
+#toolbarContainer, .findbar {
   position: relative;
   height: 32px;
   background-color: #474747; /* fallback */
   background-image: url(images/texture.png),
                     linear-gradient(hsla(0,0%,32%,.99), hsla(0,0%,27%,.95));
 }
-html[dir='ltr'] #toolbarContainer, .findbar, .secondaryToolbar {
+html[dir='ltr'] #toolbarContainer, .findbar {
   box-shadow: inset 0 1px 1px hsla(0,0%,0%,.15),
               inset 0 -1px 0 hsla(0,0%,100%,.05),
               0 1px 0 hsla(0,0%,0%,.15),
               0 1px 1px hsla(0,0%,0%,.1);
 }
-html[dir='rtl'] #toolbarContainer, .findbar, .secondaryToolbar {
+html[dir='rtl'] #toolbarContainer, .findbar {
   box-shadow: inset 0 1px 1px hsla(0,0%,0%,.15),
               inset 0 -1px 0 hsla(0,0%,100%,.05),
               0 1px 0 hsla(0,0%,0%,.15),
@@ -389,7 +270,7 @@ html[dir='rtl'] #toolbarContainer, .findbar, .secondaryToolbar {
   animation: progressIndeterminate 950ms linear infinite;
 }
 
-.findbar, .secondaryToolbar {
+.findbar {
   top: 32px;
   position: absolute;
   z-index: 10000;
@@ -451,26 +332,6 @@ html[dir='rtl'] .findbar {
 }
 html[dir='rtl'] #findInput[data-status="pending"] {
   background-position: left;
-}
-
-.secondaryToolbar {
-  padding: 6px;
-  height: auto;
-  z-index: 30000;
-}
-html[dir='ltr'] .secondaryToolbar {
-  right: 4px;
-}
-html[dir='rtl'] .secondaryToolbar {
-  left: 4px;
-}
-
-#secondaryToolbarButtonContainer {
-  max-width: 200px;
-  max-height: 400px;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-bottom: -4px;
 }
 
 .doorHanger,
@@ -590,7 +451,6 @@ html[dir='rtl'] .splitToolbarButton > .toolbarButton {
 }
 
 .toolbarButton,
-.secondaryToolbarButton,
 .overlayButton {
   border: 0 none;
   background: none;
@@ -606,7 +466,6 @@ html[dir='rtl'] .splitToolbarButton > .toolbarButton {
 }
 
 .toolbarButton[disabled],
-.secondaryToolbarButton[disabled],
 .overlayButton[disabled] {
   opacity: .5;
 }
@@ -699,7 +558,6 @@ html[dir='rtl'] .splitToolbarButtonSeparator {
 
 .toolbarButton,
 .dropdownToolbarButton,
-.secondaryToolbarButton,
 .overlayButton {
   min-width: 16px;
   padding: 2px 6px 0;
@@ -735,9 +593,7 @@ html[dir='rtl'] .dropdownToolbarButton {
 .toolbarButton:hover,
 .toolbarButton:focus,
 .dropdownToolbarButton,
-.overlayButton,
-.secondaryToolbarButton:hover,
-.secondaryToolbarButton:focus {
+.overlayButton {
   background-color: hsla(0,0%,0%,.12);
   background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
   background-clip: padding-box;
@@ -749,9 +605,7 @@ html[dir='rtl'] .dropdownToolbarButton {
 }
 
 .toolbarButton:hover:active,
-.overlayButton:hover:active,
-.dropdownToolbarButton:hover:active,
-.secondaryToolbarButton:hover:active {
+.overlayButton:hover:active {
   background-color: hsla(0,0%,0%,.2);
   background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
   border-color: hsla(0,0%,0%,.35) hsla(0,0%,0%,.4) hsla(0,0%,0%,.45);
@@ -767,8 +621,7 @@ html[dir='rtl'] .dropdownToolbarButton {
 }
 
 .toolbarButton.toggled,
-.splitToolbarButton.toggled > .toolbarButton.toggled,
-.secondaryToolbarButton.toggled {
+.splitToolbarButton.toggled > .toolbarButton.toggled {
   background-color: hsla(0,0%,0%,.3);
   background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
   border-color: hsla(0,0%,0%,.4) hsla(0,0%,0%,.45) hsla(0,0%,0%,.5);
@@ -784,8 +637,7 @@ html[dir='rtl'] .dropdownToolbarButton {
 }
 
 .toolbarButton.toggled:hover:active,
-.splitToolbarButton.toggled > .toolbarButton.toggled:hover:active,
-.secondaryToolbarButton.toggled:hover:active {
+.splitToolbarButton.toggled > .toolbarButton.toggled:hover:active {
   background-color: hsla(0,0%,0%,.4);
   border-color: hsla(0,0%,0%,.4) hsla(0,0%,0%,.5) hsla(0,0%,0%,.55);
   box-shadow: 0 1px 1px hsla(0,0%,0%,.2) inset,
@@ -862,35 +714,13 @@ html[dir='rtl'] #findNext {
   margin-left: 3px;
 }
 
-.toolbarButton::before,
-.secondaryToolbarButton::before {
+.toolbarButton::before {
   /* All matching images have a size of 16x16
    * All relevant containers have a size of 32x25 */
   position: absolute;
   display: inline-block;
   top: 4px;
   left: 7px;
-}
-
-html[dir="ltr"] .secondaryToolbarButton::before {
-  left: 4px;
-}
-html[dir="rtl"] .secondaryToolbarButton::before {
-  right: 4px;
-}
-
-html[dir='ltr'] .toolbarButton#sidebarToggle::before {
-  content: url(images/toolbarButton-sidebarToggle.png);
-}
-html[dir='rtl'] .toolbarButton#sidebarToggle::before {
-  content: url(images/toolbarButton-sidebarToggle-rtl.png);
-}
-
-html[dir='ltr'] .toolbarButton#secondaryToolbarToggle::before {
-  content: url(images/toolbarButton-secondaryToolbarToggle.png);
-}
-html[dir='rtl'] .toolbarButton#secondaryToolbarToggle::before {
-  content: url(images/toolbarButton-secondaryToolbarToggle-rtl.png);
 }
 
 html[dir='ltr'] .toolbarButton.findPrevious::before {
@@ -929,28 +759,19 @@ html[dir='rtl'] .toolbarButton.pageDown::before {
   content: url(images/toolbarButton-zoomIn.png);
 }
 
-.toolbarButton.presentationMode::before,
-.secondaryToolbarButton.presentationMode::before {
+.toolbarButton.presentationMode::before {
   content: url(images/toolbarButton-presentationMode.png);
 }
 
-.toolbarButton.print::before,
-.secondaryToolbarButton.print::before {
+.toolbarButton.print::before {
   content: url(images/toolbarButton-print.png);
 }
 
-.toolbarButton.openFile::before,
-.secondaryToolbarButton.openFile::before {
-  content: url(images/toolbarButton-openFile.png);
-}
-
-.toolbarButton.download::before,
-.secondaryToolbarButton.download::before {
+.toolbarButton.download::before {
   content: url(images/toolbarButton-download.png);
 }
 
-.toolbarButton.bookmark,
-.secondaryToolbarButton.bookmark {
+.toolbarButton.bookmark {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -958,17 +779,13 @@ html[dir='rtl'] .toolbarButton.pageDown::before {
   padding-top: 4px;
   text-decoration: none;
 }
-.secondaryToolbarButton.bookmark {
-  padding-top: 5px;
-}
 
 .bookmark[href='#'] {
   opacity: .5;
   pointer-events: none;
 }
 
-.toolbarButton.bookmark::before,
-.secondaryToolbarButton.bookmark::before {
+.toolbarButton.bookmark::before {
   content: url(images/toolbarButton-bookmark.png);
 }
 
@@ -989,84 +806,6 @@ html[dir="rtl"] #viewOutline.toolbarButton::before {
 
 #viewFind.toolbarButton::before {
   content: url(images/toolbarButton-search.png);
-}
-
-.toolbarButton.pdfSidebarNotification::after {
-  position: absolute;
-  display: inline-block;
-  top: 1px;
-  /* Create a filled circle, with a diameter of 9 pixels, using only CSS: */
-  content: '';
-  background-color: #70DB55;
-  height: 9px;
-  width: 9px;
-  border-radius: 50%;
-}
-html[dir='ltr'] .toolbarButton.pdfSidebarNotification::after {
-  left: 17px;
-}
-html[dir='rtl'] .toolbarButton.pdfSidebarNotification::after {
-  right: 17px;
-}
-
-.secondaryToolbarButton {
-  position: relative;
-  margin: 0 0 4px 0;
-  padding: 3px 0 1px 0;
-  height: auto;
-  min-height: 25px;
-  width: auto;
-  min-width: 100%;
-  white-space: normal;
-}
-html[dir="ltr"] .secondaryToolbarButton {
-  padding-left: 24px;
-  text-align: left;
-}
-html[dir="rtl"] .secondaryToolbarButton {
-  padding-right: 24px;
-  text-align: right;
-}
-html[dir="ltr"] .secondaryToolbarButton.bookmark {
-  padding-left: 27px;
-}
-html[dir="rtl"] .secondaryToolbarButton.bookmark {
-  padding-right: 27px;
-}
-
-html[dir="ltr"] .secondaryToolbarButton > span {
-  padding-right: 4px;
-}
-html[dir="rtl"] .secondaryToolbarButton > span {
-  padding-left: 4px;
-}
-
-.secondaryToolbarButton.firstPage::before {
-  content: url(images/secondaryToolbarButton-firstPage.png);
-}
-
-.secondaryToolbarButton.lastPage::before {
-  content: url(images/secondaryToolbarButton-lastPage.png);
-}
-
-.secondaryToolbarButton.rotateCcw::before {
-  content: url(images/secondaryToolbarButton-rotateCcw.png);
-}
-
-.secondaryToolbarButton.rotateCw::before {
-  content: url(images/secondaryToolbarButton-rotateCw.png);
-}
-
-.secondaryToolbarButton.selectTool::before {
-  content: url(images/secondaryToolbarButton-selectTool.png);
-}
-
-.secondaryToolbarButton.handTool::before {
-  content: url(images/secondaryToolbarButton-handTool.png);
-}
-
-.secondaryToolbarButton.documentProperties::before {
-  content: url(images/secondaryToolbarButton-documentProperties.png);
 }
 
 .verticalToolbarSeparator {
@@ -1493,30 +1232,6 @@ html[dir='rtl'] .outlineItemToggler::before {
   width: 200px;
 }
 
-#documentPropertiesOverlay > .dialog {
-  text-align: left;
-}
-#documentPropertiesOverlay .row > * {
-  min-width: 100px;
-}
-html[dir='ltr'] #documentPropertiesOverlay .row > * {
-  text-align: left;
-}
-html[dir='rtl'] #documentPropertiesOverlay .row > * {
-  text-align: right;
-}
-#documentPropertiesOverlay .row > span {
-  width: 125px;
-  word-wrap: break-word;
-}
-#documentPropertiesOverlay .row > p {
-  max-width: 225px;
-  word-wrap: break-word;
-}
-#documentPropertiesOverlay .buttonRow {
-  margin-top: 10px;
-}
-
 .clearBoth {
   clear: both;
 }
@@ -1652,22 +1367,9 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
     top: -5px;
   }
 
-  .secondaryToolbarButton::before {
-    -webkit-transform: scale(0.5);
-    transform: scale(0.5);
-    top: -4px;
-  }
-
   html[dir='ltr'] .toolbarButton::before,
   html[dir='rtl'] .toolbarButton::before {
     left: -1px;
-  }
-
-  html[dir='ltr'] .secondaryToolbarButton::before {
-    left: -2px;
-  }
-  html[dir='rtl'] .secondaryToolbarButton::before {
-    left: 186px;
   }
 
   .toolbarField.pageNumber.visiblePageIsLoading,
@@ -1679,20 +1381,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   .dropdownToolbarButton {
     background: url(images/toolbarButton-menuArrows@2x.png) no-repeat;
     background-size: 7px 16px;
-  }
-
-  html[dir='ltr'] .toolbarButton#sidebarToggle::before {
-    content: url(images/toolbarButton-sidebarToggle@2x.png);
-  }
-  html[dir='rtl'] .toolbarButton#sidebarToggle::before {
-    content: url(images/toolbarButton-sidebarToggle-rtl@2x.png);
-  }
-
-  html[dir='ltr'] .toolbarButton#secondaryToolbarToggle::before {
-    content: url(images/toolbarButton-secondaryToolbarToggle@2x.png);
-  }
-  html[dir='rtl'] .toolbarButton#secondaryToolbarToggle::before {
-    content: url(images/toolbarButton-secondaryToolbarToggle-rtl@2x.png);
   }
 
   html[dir='ltr'] .toolbarButton.findPrevious::before {
@@ -1731,28 +1419,19 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
     content: url(images/toolbarButton-zoomOut@2x.png);
   }
 
-  .toolbarButton.presentationMode::before,
-  .secondaryToolbarButton.presentationMode::before {
+  .toolbarButton.presentationMode::before {
     content: url(images/toolbarButton-presentationMode@2x.png);
   }
 
-  .toolbarButton.print::before,
-  .secondaryToolbarButton.print::before {
+  .toolbarButton.print::before {
     content: url(images/toolbarButton-print@2x.png);
   }
 
-  .toolbarButton.openFile::before,
-  .secondaryToolbarButton.openFile::before {
-    content: url(images/toolbarButton-openFile@2x.png);
-  }
-
-  .toolbarButton.download::before,
-  .secondaryToolbarButton.download::before {
+  .toolbarButton.download::before {
     content: url(images/toolbarButton-download@2x.png);
   }
 
-  .toolbarButton.bookmark::before,
-  .secondaryToolbarButton.bookmark::before {
+  .toolbarButton.bookmark::before {
     content: url(images/toolbarButton-bookmark@2x.png);
   }
 
@@ -1773,34 +1452,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
 
   #viewFind.toolbarButton::before {
     content: url(images/toolbarButton-search@2x.png);
-  }
-
-  .secondaryToolbarButton.firstPage::before {
-    content: url(images/secondaryToolbarButton-firstPage@2x.png);
-  }
-
-  .secondaryToolbarButton.lastPage::before {
-    content: url(images/secondaryToolbarButton-lastPage@2x.png);
-  }
-
-  .secondaryToolbarButton.rotateCcw::before {
-    content: url(images/secondaryToolbarButton-rotateCcw@2x.png);
-  }
-
-  .secondaryToolbarButton.rotateCw::before {
-    content: url(images/secondaryToolbarButton-rotateCw@2x.png);
-  }
-
-  .secondaryToolbarButton.selectTool::before {
-    content: url(images/secondaryToolbarButton-selectTool@2x.png);
-  }
-
-  .secondaryToolbarButton.handTool::before {
-    content: url(images/secondaryToolbarButton-handTool@2x.png);
-  }
-
-  .secondaryToolbarButton.documentProperties::before {
-    content: url(images/secondaryToolbarButton-documentProperties@2x.png);
   }
 
   .outlineItemToggler::before {
@@ -1830,7 +1481,7 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   }
 
   /* Rules for browsers that don't support mozPrintCallback. */
-  #sidebarContainer, #secondaryToolbar, .toolbar, #loadingBox, #errorWrapper, .textLayer {
+  .toolbar, #loadingBox, #errorWrapper, .textLayer {
     display: none;
   }
   #viewerContainer {
@@ -1904,17 +1555,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
 }
 
 @media all and (max-width: 840px) {
-  #sidebarContent {
-    background-color: hsla(0,0%,0%,.7);
-  }
-
-  html[dir='ltr'] #outerContainer.sidebarOpen #viewerContainer {
-    left: 0px;
-  }
-  html[dir='rtl'] #outerContainer.sidebarOpen #viewerContainer {
-    right: 0px;
-  }
-
   #outerContainer .hiddenLargeView,
   #outerContainer .hiddenMediumView {
     display: inherit;

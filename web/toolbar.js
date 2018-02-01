@@ -24,7 +24,7 @@ const SCALE_SELECT_PADDING = 22;
 
 /**
  * @typedef {Object} ToolbarOptions
- * @property {HTMLDivElement} container - Container for the secondary toolbar.
+ * @property {HTMLDivElement} container - Container for the toolbar.
  * @property {HTMLSpanElement} numPages - Label that contains number of pages.
  * @property {HTMLInputElement} pageNumber - Control for display and user input
  *   of the current page number.
@@ -38,7 +38,6 @@ const SCALE_SELECT_PADDING = 22;
  * @property {HTMLButtonElement} zoomIn - Button to zoom in the pages.
  * @property {HTMLButtonElement} zoomOut - Button to zoom out the pages.
  * @property {HTMLButtonElement} viewFind - Button to open find bar.
- * @property {HTMLButtonElement} openFile - Button to open a new document.
  * @property {HTMLButtonElement} presentationModeButton - Button to switch to
  *   presentation mode.
  * @property {HTMLButtonElement} download - Button to download the document.
@@ -138,10 +137,6 @@ class Toolbar {
 
     items.presentationModeButton.addEventListener('click', function() {
       eventBus.dispatch('presentationmode');
-    });
-
-    items.openFile.addEventListener('click', function() {
-      eventBus.dispatch('openfile');
     });
 
     items.print.addEventListener('click', function() {

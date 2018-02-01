@@ -310,14 +310,6 @@ class PDFLinkService {
         }
         break;
 
-      case 'LastPage':
-        this.page = this.pagesCount;
-        break;
-
-      case 'FirstPage':
-        this.page = 1;
-        break;
-
       default:
         break; // No action according to spec
     }

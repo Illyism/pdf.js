@@ -83,20 +83,6 @@ function attachDOMEventsToEventBus(eventBus) {
     });
     window.dispatchEvent(event);
   });
-  eventBus.on('attachmentsloaded', function(evt) {
-    let event = document.createEvent('CustomEvent');
-    event.initCustomEvent('attachmentsloaded', true, true, {
-      attachmentsCount: evt.attachmentsCount,
-    });
-    evt.source.container.dispatchEvent(event);
-  });
-  eventBus.on('sidebarviewchanged', function(evt) {
-    let event = document.createEvent('CustomEvent');
-    event.initCustomEvent('sidebarviewchanged', true, true, {
-      view: evt.view,
-    });
-    evt.source.outerContainer.dispatchEvent(event);
-  });
   eventBus.on('pagemode', function(evt) {
     let event = document.createEvent('CustomEvent');
     event.initCustomEvent('pagemode', true, true, {
@@ -118,13 +104,6 @@ function attachDOMEventsToEventBus(eventBus) {
       switchInProgress: evt.switchInProgress,
     });
     window.dispatchEvent(event);
-  });
-  eventBus.on('outlineloaded', function(evt) {
-    let event = document.createEvent('CustomEvent');
-    event.initCustomEvent('outlineloaded', true, true, {
-      outlineCount: evt.outlineCount,
-    });
-    evt.source.container.dispatchEvent(event);
   });
 }
 

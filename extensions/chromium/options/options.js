@@ -77,8 +77,6 @@ Promise.all([
                                            prefName);
     } else if (prefName === 'defaultZoomValue') {
       renderPreference = renderDefaultZoomValue(prefSchema.title);
-    } else if (prefName === 'sidebarViewOnLoad') {
-      renderPreference = renderSidebarViewOnLoad(prefSchema.title);
     } else if (prefName === 'cursorToolOnLoad') {
       renderPreference = renderCursorToolOnLoad(prefSchema.title);
     } else if (prefName === 'externalLinkTarget') {
@@ -179,23 +177,6 @@ function renderDefaultZoomValue(shortDescription) {
     } else {
       customOption.hidden = true;
     }
-  }
-  return renderPreference;
-}
-
-function renderSidebarViewOnLoad(shortDescription) {
-  var wrapper = importTemplate('sidebarViewOnLoad-template');
-  var select = wrapper.querySelector('select');
-  select.onchange = function() {
-    storageArea.set({
-      sidebarViewOnLoad: parseInt(this.value),
-    });
-  };
-  wrapper.querySelector('span').textContent = shortDescription;
-  document.getElementById('settings-boxes').appendChild(wrapper);
-
-  function renderPreference(value) {
-    select.value = value;
   }
   return renderPreference;
 }

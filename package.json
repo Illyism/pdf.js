@@ -39,7 +39,8 @@
     "yargs": "^9.0.1"
   },
   "scripts": {
-    "test": "gulp lint unittestcli externaltest"
+    "test": "gulp lint unittestcli externaltest",
+    "build": "gulp generic && rm -rf ../legaldocs/html/pdfjs &&  cp -rf build/generic ../legaldocs/html/pdfjs"
   },
   "repository": {
     "type": "git",
