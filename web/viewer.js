@@ -73,8 +73,7 @@ function getViewerConfiguration() {
       zoomOut: document.getElementById('zoomOut'),
       viewFind: document.getElementById('viewFind'),
       print: document.getElementById('print'),
-      presentationModeButton: document.getElementById('presentationMode'),
-      download: document.getElementById('download'),
+      presentationModeButton: document.getElementById('presentationMode')
     },
     fullscreen: {},
     findBar: {

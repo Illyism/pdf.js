@@ -40,7 +40,6 @@ const SCALE_SELECT_PADDING = 22;
  * @property {HTMLButtonElement} viewFind - Button to open find bar.
  * @property {HTMLButtonElement} presentationModeButton - Button to switch to
  *   presentation mode.
- * @property {HTMLButtonElement} download - Button to download the document.
  * @property {HTMLAElement} viewBookmark - Element to link current url of
  *   the page view.
  */
@@ -141,10 +140,6 @@ class Toolbar {
 
     items.print.addEventListener('click', function() {
       eventBus.dispatch('print');
-    });
-
-    items.download.addEventListener('click', function() {
-      eventBus.dispatch('download');
     });
 
     // Suppress context menus for some controls.
