@@ -64,8 +64,6 @@ function getViewerConfiguration() {
       container: document.getElementById('toolbarViewer'),
       numPages: document.getElementById('numPages'),
       pageNumber: document.getElementById('pageNumber'),
-      scaleSelectContainer: document.getElementById('scaleSelectContainer'),
-      scaleSelect: document.getElementById('scaleSelect'),
       customScaleOption: document.getElementById('customScaleOption'),
       previous: document.getElementById('previous'),
       next: document.getElementById('next'),
@@ -73,12 +71,11 @@ function getViewerConfiguration() {
       zoomOut: document.getElementById('zoomOut'),
       viewFind: document.getElementById('viewFind'),
       print: document.getElementById('print'),
-      presentationModeButton: document.getElementById('presentationMode')
+      presentationModeButton: document.getElementById('presentationMode'),
     },
     fullscreen: {},
     findBar: {
       bar: document.getElementById('findbar'),
-      toggleButton: document.getElementById('viewFind'),
       findField: document.getElementById('findInput'),
       highlightAllCheckbox: document.getElementById('findHighlightAll'),
       caseSensitiveCheckbox: document.getElementById('findMatchCase'),
@@ -87,6 +84,7 @@ function getViewerConfiguration() {
       findStatusIcon: document.getElementById('findStatusIcon'),
       findPreviousButton: document.getElementById('findPrevious'),
       findNextButton: document.getElementById('findNext'),
+      closeFindbar: document.getElementById('closeFindbar'),
     },
     passwordOverlay: {
       overlayName: 'passwordOverlay',

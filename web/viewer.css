@@ -193,7 +193,7 @@ html[dir='rtl'] #viewerContainer {
   padding: 0;
   position: absolute;
   pointer-events: none;
-  width: 290px;
+  width: 300px;
   margin: auto;
 }
 
@@ -204,10 +204,6 @@ html[dir='rtl'] #viewerContainer {
   position: relative;
   transition: opacity .5s;
   pointer-events: all;
-}
-
-body:hover #toolbarContainer {
-  opacity: 1;
 }
 
 #toolbarContainer, .findbar {
@@ -388,6 +384,7 @@ html[dir='rtl'] .splitToolbarButton > .toolbarButton {
   background: none;
   width: 32px;
   height: 25px;
+  cursor: pointer;
 }
 
 .toolbarButton > span {
@@ -407,7 +404,6 @@ html[dir='rtl'] .splitToolbarButton > .toolbarButton {
 }
 
 .splitToolbarButton:hover > .toolbarButton,
-.splitToolbarButton:focus > .toolbarButton,
 .splitToolbarButton.toggled > .toolbarButton,
 .toolbarButton.textButton {
   background-color: hsla(0,0%,0%,.12);
@@ -427,13 +423,10 @@ html[dir='rtl'] .splitToolbarButton > .toolbarButton {
 
 }
 .splitToolbarButton > .toolbarButton:hover,
-.splitToolbarButton > .toolbarButton:focus,
 .dropdownToolbarButton:hover,
 .overlayButton:hover,
-.overlayButton:focus,
-.toolbarButton.textButton:hover,
-.toolbarButton.textButton:focus {
-  background-color: hsla(0,0%,0%,.2);
+.toolbarButton.textButton:hover{
+  background-color: hsla(0,0%,100%,.2);
   box-shadow: 0 1px 0 hsla(0,0%,100%,.05) inset,
               0 0 1px hsla(0,0%,100%,.15) inset,
               0 0 1px hsla(0,0%,0%,.05);
@@ -502,7 +495,7 @@ html[dir='rtl'] .splitToolbarButtonSeparator {
   -moz-user-select: none;
   -ms-user-select: none;
   /* Opera does not support user-select, use <... unselectable="on"> instead */
-  cursor: default;
+  cursor: button;
   -webkit-transition-property: background-color, border-color, box-shadow;
   -webkit-transition-duration: 150ms;
   -webkit-transition-timing-function: ease;
@@ -511,22 +504,10 @@ html[dir='rtl'] .splitToolbarButtonSeparator {
   transition-timing-function: ease;
 }
 
-html[dir='ltr'] .toolbarButton,
-html[dir='ltr'] .overlayButton,
-html[dir='ltr'] .dropdownToolbarButton {
-  margin: 3px 2px 4px 0;
-}
-html[dir='rtl'] .toolbarButton,
-html[dir='rtl'] .overlayButton,
-html[dir='rtl'] .dropdownToolbarButton {
-  margin: 3px 0 4px 2px;
-}
-
 .toolbarButton:hover,
-.toolbarButton:focus,
 .dropdownToolbarButton,
 .overlayButton {
-  background-color: hsla(0,0%,0%,.12);
+  background-color: hsla(0,0%,100%,.12);
   background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
   background-clip: padding-box;
   border: 1px solid hsla(0,0%,0%,.35);
@@ -538,7 +519,7 @@ html[dir='rtl'] .dropdownToolbarButton {
 
 .toolbarButton:hover:active,
 .overlayButton:hover:active {
-  background-color: hsla(0,0%,0%,.2);
+  background-color: hsla(0,0%,100%,.2);
   background-image: linear-gradient(hsla(0,0%,100%,.05), hsla(0,0%,100%,0));
   border-color: hsla(0,0%,0%,.35) hsla(0,0%,0%,.4) hsla(0,0%,0%,.45);
   box-shadow: 0 1px 1px hsla(0,0%,0%,.1) inset,
@@ -688,6 +669,19 @@ html[dir='rtl'] .toolbarButton.pageDown::before {
 }
 
 .toolbarButton.zoomIn::before {
+  content: url(images/toolbarButton-zoomIn.png);
+}
+
+.toolbarButton.closeFindbar {
+  transform: rotate(45deg);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  top: 2px;
+  left: 3px;
+}
+
+.toolbarButton.closeFindbar::before {
   content: url(images/toolbarButton-zoomIn.png);
 }
 
@@ -1343,6 +1337,10 @@ html[dir='rtl'] .outlineItemToggler::before {
     content: url(images/toolbarButton-zoomIn@2x.png);
   }
 
+  .toolbarButton.closeFindbar::before {
+    content: url(images/toolbarButton-zoomIn@2x.png);
+  }
+
   .toolbarButton.zoomOut::before {
     content: url(images/toolbarButton-zoomOut@2x.png);
   }
@@ -1515,8 +1513,21 @@ html[dir='rtl'] .outlineItemToggler::before {
   }
 }
 
-#scaleSelectContainer,
-#viewFind,
-#print {
-  display: none !important;
+.pagingSection {
+  width: 134px;
+  text-align: center;
+}
+
+#findbarOptionsContainer {
+  display: none;
+}
+
+body:hover #toolbarContainer {
+  opacity: 1;
+}
+
+@media all and (max-width: 840px) {
+  #toolbarContainer {
+    opacity: 1;
+  }
 }

@@ -14,13 +14,11 @@
  */
 
 import {
-  animationStarted, DEFAULT_SCALE, DEFAULT_SCALE_VALUE, MAX_SCALE,
-  MIN_SCALE, noContextMenuHandler, NullL10n
+  DEFAULT_SCALE, DEFAULT_SCALE_VALUE, MAX_SCALE,
+  MIN_SCALE, NullL10n
 } from './ui_utils';
 
 const PAGE_NUMBER_LOADING_INDICATOR = 'visiblePageIsLoading';
-const SCALE_SELECT_CONTAINER_PADDING = 8;
-const SCALE_SELECT_PADDING = 22;
 
 /**
  * @typedef {Object} ToolbarOptions
@@ -28,9 +26,6 @@ const SCALE_SELECT_PADDING = 22;
  * @property {HTMLSpanElement} numPages - Label that contains number of pages.
  * @property {HTMLInputElement} pageNumber - Control for display and user input
  *   of the current page number.
- * @property {HTMLSpanElement} scaleSelectContainer - Container where scale
- *   controls are placed. The width is adjusted on UI initialization.
- * @property {HTMLSelectElement} scaleSelect - Scale selection control.
  * @property {HTMLOptionElement} customScaleOption - The item used to display
  *   a non-predefined scale.
  * @property {HTMLButtonElement} previous - Button to go to the previous page.
@@ -124,26 +119,9 @@ class Toolbar {
       });
     });
 
-    items.scaleSelect.addEventListener('change', function() {
-      if (this.value === 'custom') {
-        return;
-      }
-      eventBus.dispatch('scalechanged', {
-        source: self,
-        value: this.value,
-      });
-    });
-
     items.presentationModeButton.addEventListener('click', function() {
       eventBus.dispatch('presentationmode');
     });
-
-    items.print.addEventListener('click', function() {
-      eventBus.dispatch('print');
-    });
-
-    // Suppress context menus for some controls.
-    items.scaleSelect.oncontextmenu = noContextMenuHandler;
 
     eventBus.on('localized', () => {
       this._localized();
@@ -152,7 +130,6 @@ class Toolbar {
 
   _localized() {
     this._wasLocalized = true;
-    this._adjustScaleWidth();
     this._updateUIState(true);
   }
 
@@ -162,7 +139,6 @@ class Toolbar {
       return;
     }
     let { pageNumber, pagesCount, items, } = this;
-    let scaleValue = (this.pageScaleValue || this.pageScale).toString();
     let scale = this.pageScale;
 
     if (resetNumPages) {
@@ -193,26 +169,6 @@ class Toolbar {
 
     items.zoomOut.disabled = (scale <= MIN_SCALE);
     items.zoomIn.disabled = (scale >= MAX_SCALE);
-
-    let customScale = Math.round(scale * 10000) / 100;
-    this.l10n.get('page_scale_percent', { scale: customScale, },
-                  '{{scale}}%').then((msg) => {
-      let options = items.scaleSelect.options;
-      let predefinedValueFound = false;
-      for (let i = 0, ii = options.length; i < ii; i++) {
-        let option = options[i];
-        if (option.value !== scaleValue) {
-          option.selected = false;
-          continue;
-        }
-        option.selected = true;
-        predefinedValueFound = true;
-      }
-      if (!predefinedValueFound) {
-        items.customScaleOption.textContent = msg;
-        items.customScaleOption.selected = true;
-      }
-    });
   }
 
   updateLoadingIndicatorState(loading = false) {
@@ -223,28 +179,6 @@ class Toolbar {
     } else {
       pageNumberInput.classList.remove(PAGE_NUMBER_LOADING_INDICATOR);
     }
-  }
-
-  _adjustScaleWidth() {
-    let container = this.items.scaleSelectContainer;
-    let select = this.items.scaleSelect;
-
-    animationStarted.then(function() {
-      // Adjust the width of the zoom box to fit the content.
-      // Note: If the window is narrow enough that the zoom box is not
-      //       visible, we temporarily show it to be able to adjust its width.
-      if (container.clientWidth === 0) {
-        container.setAttribute('style', 'display: inherit;');
-      }
-      if (container.clientWidth > 0) {
-        select.setAttribute('style', 'min-width: inherit;');
-        let width = select.clientWidth + SCALE_SELECT_CONTAINER_PADDING;
-        select.setAttribute('style', 'min-width: ' +
-                                     (width + SCALE_SELECT_PADDING) + 'px;');
-        container.setAttribute('style', 'min-width: ' + width + 'px; ' +
-                                        'max-width: ' + width + 'px;');
-      }
-    });
   }
 }
 

@@ -27,7 +27,6 @@ class PDFFindBar {
     this.opened = false;
 
     this.bar = options.bar || null;
-    this.toggleButton = options.toggleButton || null;
     this.findField = options.findField || null;
     this.highlightAll = options.highlightAllCheckbox || null;
     this.caseSensitive = options.caseSensitiveCheckbox || null;
@@ -36,6 +35,7 @@ class PDFFindBar {
     this.findStatusIcon = options.findStatusIcon || null;
     this.findPreviousButton = options.findPreviousButton || null;
     this.findNextButton = options.findNextButton || null;
+    this.closeFindbar = options.closeFindbar || null;
     this.findController = options.findController || null;
     this.eventBus = options.eventBus;
     this.l10n = l10n;
@@ -46,10 +46,6 @@ class PDFFindBar {
     }
 
     // Add event listeners to the DOM elements.
-    this.toggleButton.addEventListener('click', () => {
-      this.toggle();
-    });
-
     this.findField.addEventListener('input', () => {
       this.dispatchEvent('');
     });
@@ -65,6 +61,10 @@ class PDFFindBar {
           this.close();
           break;
       }
+    });
+
+    this.closeFindbar.addEventListener('click', () => {
+      this.close();
     });
 
     this.findPreviousButton.addEventListener('click', () => {
@@ -168,7 +168,6 @@ class PDFFindBar {
   open() {
     if (!this.opened) {
       this.opened = true;
-      this.toggleButton.classList.add('toggled');
       this.bar.classList.remove('hidden');
     }
     this.findField.select();
@@ -182,7 +181,6 @@ class PDFFindBar {
       return;
     }
     this.opened = false;
-    this.toggleButton.classList.remove('toggled');
     this.bar.classList.add('hidden');
     this.findController.active = false;
   }
